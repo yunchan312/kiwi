@@ -11,10 +11,10 @@ export default function GoogleSignin() {
   };
   return (
     <div
-      className="rounded-full bg-kiwi w-[60%] py-1 px-5 text-center cursor-pointer"
+      className="rounded-full bg-kiwi w-[60%] py-1 px-5 text-center cursor-pointer flex justify-center items-center"
       onClick={onGoogleLogin}
     >
-      구글로 시작하기
+      <span>Start with Google</span>
     </div>
   );
 }
