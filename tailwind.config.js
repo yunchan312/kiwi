@@ -7,6 +7,7 @@ export default {
         kiwi: "#00d26a",
         kiwiCeed: "#1b1c1b",
         kiwiCenter: "#e2ff92",
+        kiwiPeel: "#6d4534",
       },
     },
   },

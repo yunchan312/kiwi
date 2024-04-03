@@ -1,7 +1,10 @@
+import KiwiTextArea from "../components/kiwiTextArea";
+
 export default function Home() {
   return (
-    <div className="border-2 border-red-400">
+    <div>
       <div>Home</div>
+      <KiwiTextArea />
     </div>
   );
 }

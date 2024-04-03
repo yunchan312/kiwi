@@ -1,5 +1,14 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import homeIcon from "../assets/home.svg";
+import blogIcon from "../assets/blog.svg";
+import bookmarkIcon from "../assets/bookmark.svg";
+import chattingIcon from "../assets/chatting.svg";
+import inquiryIcon from "../assets/inquiry.svg";
+import profileIcon from "../assets/profile.svg";
+import searchIcon from "../assets/search.svg";
+import trendingIcon from "../assets/trending.svg";
+import NavBtn from "../components/navBtn";
 
 export default function Layout() {
   const navigate = useNavigate();
@@ -10,37 +19,26 @@ export default function Layout() {
       navigate("/login");
     }
   };
-  const onNav = (des) => {
-    navigate(des);
-  };
   return (
     <div className="flex justify-between w-[100vw]">
-      <div className="border-2 w-[300px] py-5 px-3">
+      <div className="border-r-2 w-[300px] py-5 px-3">
         <img alt="logo" src="/kiwi.png" className="mb-10" />
-        <div
-          onClick={onNav("/")}
-          className="flex justify-start py-3 px-7 items-center gap-8 cursor-pointer hover:bg-gray-100"
-        >
-          <img alt="home" className="w-12 h-12" src="/home.svg" />
-          <span className="text-2xl">Home</span>
-        </div>
-        <div
-          onClick={onNav("/search")}
-          className="flex justify-start py-3 px-7 items-center gap-8 cursor-pointer hover:bg-gray-100"
-        >
-          <img alt="search" className="w-12 h-12" src="/search.svg" />
-          <span className="text-2xl">Search</span>
-        </div>
 
-        <div
-          onClick={onNav("/profile")}
-          className="flex justify-start py-3 px-7 items-center gap-8 cursor-pointer hover:bg-gray-100"
+        <NavBtn icon={homeIcon} text={"Home"} navigate={"/"} />
+        <NavBtn icon={searchIcon} text={"Search"} navigate={"/search"} />
+        <NavBtn icon={profileIcon} text={"Profile"} navigate={"/profile"} />
+        <NavBtn icon={blogIcon} text={"Blog"} navigate={"/blogmain"} />
+        <NavBtn icon={trendingIcon} text={"Trending"} navigate={"/trending"} />
+        <NavBtn icon={chattingIcon} text={"Chatting"} navigate={"/chatting"} />
+        <NavBtn icon={inquiryIcon} text={"Inquiry"} navigate={"/inquiry"} />
+        <NavBtn icon={bookmarkIcon} text={"Bookmark"} navigate={"/bookmark"} />
+        <button
+          onClick={() => navigate("/about")}
+          className=" text-center bg-kiwi w-[100%] h-[40px] text-white text-3xl rounded-full"
         >
-          <img alt="profile" className="w-12 h-12" src="/profile.svg" />
-          <span className="text-2xl">Profile</span>
-        </div>
+          About Kiwi &rarr;
+        </button>
       </div>
-
       <div>
         <Outlet />
       </div>

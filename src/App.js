@@ -14,6 +14,7 @@ import Inquiry from "./routes/Inquiry";
 import Profile from "./routes/Profile";
 import Search from "./routes/Search";
 import Trending from "./routes/Trending";
+import About from "./routes/About";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/trending",
         element: <Trending />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },
