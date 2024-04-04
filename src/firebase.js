@@ -7,12 +7,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDq1KVrqgEZr3taPljxTQzutzVPmz_Gq8o",
-  authDomain: "kiwi-57b9f.firebaseapp.com",
-  projectId: "kiwi-57b9f",
-  storageBucket: "kiwi-57b9f.appspot.com",
-  messagingSenderId: "809588504444",
-  appId: "1:809588504444:web:5e3994256d3b3cc9bf16f9",
+  apiKey: "AIzaSyAEP-HIOpR7AvLKSa50S3GkrO0Itw2xHP4",
+  authDomain: "kiwi-225e1.firebaseapp.com",
+  projectId: "kiwi-225e1",
+  storageBucket: "kiwi-225e1.appspot.com",
+  messagingSenderId: "418526769829",
+  appId: "1:418526769829:web:ee1394c2bd2d9d903cd34c",
 };
 
 // Initialize Firebase
