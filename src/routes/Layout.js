@@ -43,10 +43,21 @@ export default function Layout() {
         <Outlet />
       </div>
 
-      <div className="border-2 w-[300px] py-5 px-3">
-        <button onClick={onLogout} className="bg-gray-500">
-          log out
+      <div className="border-l-2 w-[300px] py-5 px-3 flex gap-5 flex-col">
+        <button
+          onClick={onLogout}
+          className="bg-kiwi text-white px-5 py-1 rounded-lg"
+        >
+          Sign out
         </button>
+
+        <div className="bg-gray-200 py-2 px-3 h-[300px] rounded-2xl">
+          <div className="text-black font-bold text-xl">You might like</div>
+        </div>
+
+        <div className="bg-gray-200 py-2 px-3 h-[500px] rounded-2xl">
+          <div className="text-black font-bold text-xl">Blog Ranking</div>
+        </div>
       </div>
     </div>
   );
