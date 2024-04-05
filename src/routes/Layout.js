@@ -34,7 +34,7 @@ export default function Layout() {
         <NavBtn icon={bookmarkIcon} text={"Bookmark"} navigate={"/bookmark"} />
         <button
           onClick={() => navigate("/about")}
-          className=" text-center bg-kiwi w-[100%] h-[40px] text-white text-3xl rounded-full"
+          className="mt-5 text-center bg-kiwi w-[100%] h-[40px] text-white text-3xl rounded-full"
         >
           About Kiwi &rarr;
         </button>

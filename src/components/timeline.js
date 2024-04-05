@@ -16,8 +16,15 @@ export default function Timeline() {
       );
       unsubscribe = await onSnapshot(kiwisQuery, (snapshot) => {
         const kiwiMap = snapshot.docs.map((doc) => {
-          const { kiwi, createdAt, userId, username, photo, userEmail } =
-            doc.data();
+          const {
+            kiwi,
+            createdAt,
+            userId,
+            username,
+            photo,
+            userEmail,
+            whoCreated,
+          } = doc.data();
           return {
             id: doc.id,
             kiwi,
@@ -26,6 +33,7 @@ export default function Timeline() {
             username,
             photo,
             userEmail,
+            whoCreated,
           };
         });
         setKiwi(kiwiMap);

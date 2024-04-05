@@ -27,6 +27,7 @@ export default function KiwiTextArea() {
         username: user.displayName || user.email,
         userId: user.uid,
         userEmail: user.email,
+        whoCreated: user.uid,
       });
       if (file) {
         const locationRef = ref(

@@ -9,6 +9,9 @@ export default {
         kiwiCenter: "#e2ff92",
         kiwiPeel: "#6d4534",
       },
+      backgroundImage: {
+        avatarDefault: "url(/public/kiwi.png)",
+      },
     },
   },
   plugins: [],
