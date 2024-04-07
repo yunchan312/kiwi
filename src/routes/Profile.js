@@ -55,9 +55,13 @@ export default function Profile() {
     }
   };
   const getAvatar = async () => {
-    const locationRef = ref(storage, `avatar/${user?.uid}`);
-    const avatarUrl = await getDownloadURL(locationRef);
-    setAvatar(avatarUrl);
+    try {
+      const locationRef = ref(storage, `avatar/${user?.uid}`);
+      const avatarUrl = await getDownloadURL(locationRef);
+      setAvatar(avatarUrl);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {

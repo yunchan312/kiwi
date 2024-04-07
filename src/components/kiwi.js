@@ -54,14 +54,16 @@ export default function Kiwi({
   const onLike = async () => {
     try {
       const targetDoc = doc(database, "kiwi", id);
-      await updateDoc(targetDoc, {
-        likedBy: arrayUnion(userId),
-      });
+      console.log(targetDoc);
+      // await updateDoc(targetDoc, {
+      //   likedBy: arrayUnion(user.uid),
+      // });
     } catch (e) {
       console.log(e);
     }
     isUserLike();
   };
+  const onDisLike = async () => {};
   const isUserLike = async () => {
     const targetDoc = doc(database, "kiwi", id);
   };
