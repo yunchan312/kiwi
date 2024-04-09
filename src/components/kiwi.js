@@ -1,10 +1,10 @@
 import { auth, database, storage } from "../firebase";
 import {
-  addDoc,
+  arrayRemove,
   arrayUnion,
-  collection,
   deleteDoc,
   doc,
+  getDoc,
   updateDoc,
 } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref } from "firebase/storage";
@@ -13,7 +13,7 @@ import Markdown from "react-markdown";
 import like from "../assets/like.svg";
 import bookmark from "../assets/bookmark.svg";
 import share from "../assets/share.svg";
-import { updateProfile } from "firebase/auth";
+import solidHeart from "../assets/solidHeart.svg";
 
 export default function Kiwi({
   whoCreated,
@@ -26,6 +26,7 @@ export default function Kiwi({
 }) {
   const user = auth.currentUser;
   const [avatar, setAvatar] = useState("");
+  const [isLike, setIsLike] = useState(false);
   const onDelete = async () => {
     const ok = window.confirm("Really Delete?");
     if (!ok || user.uid !== userId) return;
@@ -53,24 +54,42 @@ export default function Kiwi({
   };
   const onLike = async () => {
     try {
-      const targetDoc = doc(database, "kiwi", id);
-      console.log(targetDoc);
-      // await updateDoc(targetDoc, {
-      //   likedBy: arrayUnion(user.uid),
-      // });
+      const targetDocRef = doc(database, "kiwi", id);
+      await updateDoc(targetDocRef, {
+        likedBy: arrayUnion(user.uid),
+      });
     } catch (e) {
       console.log(e);
     }
     isUserLike();
   };
-  const onDisLike = async () => {};
+  const onDisLike = async () => {
+    try {
+      const targetDocRef = doc(database, "kiwi", id);
+      await updateDoc(targetDocRef, {
+        likedBy: arrayRemove(user.uid),
+      });
+      setIsLike(false);
+    } catch (e) {
+      console.log(e);
+    }
+    isUserLike();
+  };
   const isUserLike = async () => {
-    const targetDoc = doc(database, "kiwi", id);
+    const targetDocRef = doc(database, "kiwi", id);
+    const targetDocSnap = await getDoc(targetDocRef);
+    const targetData = targetDocSnap.data().likedBy;
+    targetData.map((likeIds) => {
+      if (likeIds === user.uid) {
+        setIsLike(true);
+      }
+    });
   };
   useEffect(() => {
     getAvatar();
+    isUserLike();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [avatar]);
   return (
     <div className="flex flex-col justify-around gap-3 items-center border-2 border-kiwiPeel rounded-2xl py-5 px-7">
       <div className="border-b-2 w-full flex gap-2 justify-between items-center pb-2">
@@ -116,12 +135,21 @@ export default function Kiwi({
       </div>
       <div className="border-t-2  w-full pt-2">
         <div className="flex gap-1 justify-end">
-          <img
-            onClick={onLike}
-            alt="btn"
-            src={like}
-            className="cursor-pointer hover:bg-gray-300 p-1 rounded-xl"
-          />
+          {isLike ? (
+            <img
+              onClick={onDisLike}
+              alt="btn"
+              src={solidHeart}
+              className="cursor-pointer hover:bg-gray-300 p-1 rounded-xl"
+            />
+          ) : (
+            <img
+              onClick={onLike}
+              alt="btn"
+              src={like}
+              className="cursor-pointer hover:bg-gray-300 p-1 rounded-xl"
+            />
+          )}
           <img
             alt="btn"
             src={bookmark}
