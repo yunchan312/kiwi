@@ -1,8 +1,9 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
-import { auth } from "../firebase";
+import { auth, database } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import GoogleSignin from "../components/google-login";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Create() {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +34,10 @@ export default function Create() {
       );
       await updateProfile(credentials.user, {
         displayName: createObj.name,
+      });
+      const user = auth.currentUser;
+      await setDoc(doc(database, "user", user.uid), {
+        kiwi: [],
       });
       navigate("/");
     } catch (e) {

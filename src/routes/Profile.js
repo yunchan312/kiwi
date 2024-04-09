@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { auth, database, storage } from "../firebase";
-import { collection, getDocs, limit, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import Kiwi from "../components/kiwi";
 import KiwiBird from "../assets/bird.svg";
+import WhiteBox from "../components/whiteBox";
 
 export default function Profile() {
   const user = auth.currentUser;
   const [avatar, setAvatar] = useState(user?.photoURL);
   const [kiwis, setKiwis] = useState([]);
+  const [blogNum, setBlogNum] = useState(0);
+  const [kiwiNum, setKiwiNum] = useState(0);
   const fetchKiwis = async () => {
     const kiwiQuery = query(
       collection(database, "kiwi"),
-      where("userId", "==", user?.uid),
-      limit(25)
+      where("userId", "==", user?.uid)
     );
     const snapshot = await getDocs(kiwiQuery);
     const kiwis = snapshot.docs.map((doc) => {
@@ -26,6 +28,8 @@ export default function Profile() {
         photo,
         userEmail,
         whoCreated,
+        likedBy,
+        likeNum,
       } = doc.data();
       return {
         kiwi,
@@ -36,10 +40,13 @@ export default function Profile() {
         userEmail,
         id: doc.id,
         whoCreated,
+        likedBy,
+        likeNum,
       };
     });
     setKiwis(kiwis);
   };
+
   const onAvatarChange = async (e) => {
     if (!user) return;
     const { files } = e.target;
@@ -63,10 +70,24 @@ export default function Profile() {
       console.log(e);
     }
   };
-
+  const getUserInform = async () => {
+    const document = await getDocs(collection(database, "user"));
+    const result = document.docs.map((doc) => {
+      const { kiwi, blog } = doc.data();
+      return { kiwi, blog, id: doc.id };
+    });
+    result.map((d) => {
+      if (d.id === user.uid) {
+        setKiwiNum(d.kiwi.length);
+        setBlogNum(d.blog.length);
+      }
+      return null;
+    });
+  };
   useEffect(() => {
     fetchKiwis();
     getAvatar();
+    getUserInform();
     // eslint-disable-next-line
   }, []);
   return (
@@ -102,24 +123,9 @@ export default function Profile() {
       <div>
         <div className="text-2xl">내 정보</div>
         <div className="flex justify-center items-center gap-3">
-          <div className="whiteBox">
-            <div className="boxtitle">내 키위</div>
-            <div className="boxNumber">
-              <span>100</span>
-            </div>
-          </div>
-          <div className="whiteBox">
-            <div className="boxtitle">내 블로그</div>
-            <div className="boxNumber">
-              <span>100</span>
-            </div>
-          </div>
-          <div className="whiteBox">
-            <div className="boxtitle">내가 받은 좋아요</div>
-            <div className="boxNumber">
-              <span>100</span>
-            </div>
-          </div>
+          <WhiteBox boxTitle="내 키위" kiwis={kiwis} num={kiwiNum} />
+          <WhiteBox boxTitle="내 블로그" kiwis={kiwis} num={blogNum} />
+          <WhiteBox boxTitle="내 좋아요" kiwis={kiwis} />
         </div>
       </div>
 

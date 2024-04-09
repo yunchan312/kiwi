@@ -3,10 +3,9 @@ import { auth } from "../firebase";
 import homeIcon from "../assets/home.svg";
 import blogIcon from "../assets/blog.svg";
 import bookmarkIcon from "../assets/bookmark.svg";
-import chattingIcon from "../assets/chatting.svg";
+import rankingIcon from "../assets/ranking.svg";
 import inquiryIcon from "../assets/inquiry.svg";
 import profileIcon from "../assets/profile.svg";
-import searchIcon from "../assets/search.svg";
 import trendingIcon from "../assets/trending.svg";
 import NavBtn from "../components/navBtn";
 
@@ -25,11 +24,10 @@ export default function Layout() {
         <img alt="logo" src="/kiwi.png" className="mb-10" />
 
         <NavBtn icon={homeIcon} text={"Home"} navigate={"/"} />
-        <NavBtn icon={searchIcon} text={"Search"} navigate={"/search"} />
         <NavBtn icon={profileIcon} text={"Profile"} navigate={"/profile"} />
         <NavBtn icon={blogIcon} text={"Blog"} navigate={"/blogmain"} />
         <NavBtn icon={trendingIcon} text={"Trending"} navigate={"/trending"} />
-        <NavBtn icon={chattingIcon} text={"Chatting"} navigate={"/chatting"} />
+        <NavBtn icon={rankingIcon} text={"Ranking"} navigate={"/ranking"} />
         <NavBtn icon={inquiryIcon} text={"Inquiry"} navigate={"/inquiry"} />
         <NavBtn icon={bookmarkIcon} text={"Bookmark"} navigate={"/bookmark"} />
         <button
@@ -52,7 +50,7 @@ export default function Layout() {
         </button>
 
         <div className="bg-gray-200 py-2 px-3 h-[300px] rounded-2xl">
-          <div className="text-black font-bold text-xl">You might like</div>
+          <div className="text-black font-bold text-xl">User Ranking</div>
         </div>
 
         <div className="bg-gray-200 py-2 px-3 h-[500px] rounded-2xl">

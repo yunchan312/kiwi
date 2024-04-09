@@ -14,7 +14,7 @@ export default function Timeline() {
         collection(database, "kiwi"),
         orderBy("createdAt", "desc")
       );
-      unsubscribe = await onSnapshot(kiwisQuery, (snapshot) => {
+      unsubscribe = onSnapshot(kiwisQuery, (snapshot) => {
         const kiwiMap = snapshot.docs.map((doc) => {
           const {
             kiwi,

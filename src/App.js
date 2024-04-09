@@ -9,12 +9,11 @@ import ProtectedRoute from "./components/protectedRoute";
 import BlogMain from "./routes/BlogMain";
 import BlogPosts from "./routes/BlogPosts";
 import Bookmark from "./routes/Bookmark";
-import Chatting from "./routes/Chatting";
 import Inquiry from "./routes/Inquiry";
 import Profile from "./routes/Profile";
-import Search from "./routes/Search";
 import Trending from "./routes/Trending";
 import About from "./routes/About";
+import Ranking from "./routes/Ranking";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +33,7 @@ const router = createBrowserRouter([
         element: <BlogMain />,
       },
       {
-        path: "/blogposts",
+        path: "/blogpost/:id",
         element: <BlogPosts />,
       },
       {
@@ -42,8 +41,8 @@ const router = createBrowserRouter([
         element: <Bookmark />,
       },
       {
-        path: "/chatting",
-        element: <Chatting />,
+        path: "/ranking",
+        element: <Ranking />,
       },
       {
         path: "/inquiry",
@@ -52,10 +51,6 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
-      },
-      {
-        path: "/search",
-        element: <Search />,
       },
       {
         path: "/trending",

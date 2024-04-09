@@ -27,6 +27,8 @@ export default function Kiwi({
   const user = auth.currentUser;
   const [avatar, setAvatar] = useState("");
   const [isLike, setIsLike] = useState(false);
+  const targetDocRef = doc(database, "kiwi", id);
+
   const onDelete = async () => {
     const ok = window.confirm("Really Delete?");
     if (!ok || user.uid !== userId) return;
@@ -39,6 +41,9 @@ export default function Kiwi({
         );
         await deleteObject(photoRef);
       }
+      await updateDoc(doc(database, "user", user.uid), {
+        kiwi: arrayRemove(id),
+      });
     } catch (e) {
       console.log(e);
     }
@@ -54,9 +59,13 @@ export default function Kiwi({
   };
   const onLike = async () => {
     try {
-      const targetDocRef = doc(database, "kiwi", id);
       await updateDoc(targetDocRef, {
         likedBy: arrayUnion(user.uid),
+      });
+      const targetDocSnap = await getDoc(targetDocRef);
+      const targetData = targetDocSnap.data().likedBy;
+      await updateDoc(targetDocRef, {
+        likeNum: targetData.length,
       });
     } catch (e) {
       console.log(e);
@@ -65,9 +74,13 @@ export default function Kiwi({
   };
   const onDisLike = async () => {
     try {
-      const targetDocRef = doc(database, "kiwi", id);
       await updateDoc(targetDocRef, {
         likedBy: arrayRemove(user.uid),
+      });
+      const targetDocSnap = await getDoc(targetDocRef);
+      const targetData = targetDocSnap.data().likedBy;
+      await updateDoc(targetDocRef, {
+        likeNum: targetData.length,
       });
       setIsLike(false);
     } catch (e) {
@@ -76,13 +89,19 @@ export default function Kiwi({
     isUserLike();
   };
   const isUserLike = async () => {
-    const targetDocRef = doc(database, "kiwi", id);
     const targetDocSnap = await getDoc(targetDocRef);
     const targetData = targetDocSnap.data().likedBy;
+    if (!targetData) return;
     targetData.map((likeIds) => {
       if (likeIds === user.uid) {
         setIsLike(true);
       }
+      return null;
+    });
+  };
+  const onBookmark = async () => {
+    await updateDoc(doc(database, "user", user.uid), {
+      bookmarkKiwis: arrayUnion(id),
     });
   };
   useEffect(() => {
@@ -90,6 +109,7 @@ export default function Kiwi({
     isUserLike();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [avatar]);
+
   return (
     <div className="flex flex-col justify-around gap-3 items-center border-2 border-kiwiPeel rounded-2xl py-5 px-7">
       <div className="border-b-2 w-full flex gap-2 justify-between items-center pb-2">
@@ -152,6 +172,7 @@ export default function Kiwi({
           )}
           <img
             alt="btn"
+            onClick={onBookmark}
             src={bookmark}
             className="cursor-pointer hover:bg-gray-300 p-1 rounded-xl"
           />

@@ -1,12 +1,18 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, database } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function GoogleSignin() {
   const navigate = useNavigate();
   const onGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
+    const user = auth.currentUser;
+    await setDoc(doc(database, "user", user.uid), {
+      kiwi: [],
+      blog: [],
+    });
     navigate("/");
   };
   return (
