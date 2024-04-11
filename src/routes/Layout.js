@@ -8,6 +8,8 @@ import inquiryIcon from "../assets/inquiry.svg";
 import profileIcon from "../assets/profile.svg";
 import trendingIcon from "../assets/trending.svg";
 import NavBtn from "../components/navBtn";
+import MiniKiwiRank from "../components/miniRank";
+import MiniBlogRank from "../components/blogRank";
 
 export default function Layout() {
   const navigate = useNavigate();
@@ -49,13 +51,9 @@ export default function Layout() {
           Sign out
         </button>
 
-        <div className="bg-gray-200 py-2 px-3 h-[300px] rounded-2xl">
-          <div className="text-black font-bold text-xl">User Ranking</div>
-        </div>
+        <MiniKiwiRank />
 
-        <div className="bg-gray-200 py-2 px-3 h-[500px] rounded-2xl">
-          <div className="text-black font-bold text-xl">Blog Ranking</div>
-        </div>
+        <MiniBlogRank />
       </div>
     </div>
   );

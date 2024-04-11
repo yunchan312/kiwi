@@ -41,9 +41,6 @@ export default function Kiwi({
         );
         await deleteObject(photoRef);
       }
-      await updateDoc(doc(database, "user", user.uid), {
-        kiwi: arrayRemove(id),
-      });
     } catch (e) {
       console.log(e);
     }

@@ -1,10 +1,4 @@
-import {
-  addDoc,
-  arrayUnion,
-  collection,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { auth, database, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -34,6 +28,8 @@ export default function KiwiTextArea() {
         userId: user.uid,
         userEmail: user.email,
         whoCreated: user.uid,
+        likeNum: 0,
+        likedBy: [],
       });
       if (file) {
         const locationRef = ref(
@@ -44,9 +40,6 @@ export default function KiwiTextArea() {
         const url = await getDownloadURL(result.ref);
         await updateDoc(document, { photo: url });
       }
-      await updateDoc(doc(database, "user", user.uid), {
-        kiwi: arrayUnion(document.id),
-      });
       setKiwi("");
       setFile(null);
     } catch (e) {

@@ -14,6 +14,8 @@ import Profile from "./routes/Profile";
 import Trending from "./routes/Trending";
 import About from "./routes/About";
 import Ranking from "./routes/Ranking";
+import WriteBlog from "./routes/WriteBlog";
+import BlogPost from "./routes/BlogPost";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +35,7 @@ const router = createBrowserRouter([
         element: <BlogMain />,
       },
       {
-        path: "/blogpost/:id",
+        path: "/blogposts",
         element: <BlogPosts />,
       },
       {
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/writeblog",
+        element: <WriteBlog />,
+      },
+      {
+        path: "/blogpost/:blogId",
+        element: <BlogPost />,
       },
     ],
   },
