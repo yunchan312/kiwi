@@ -16,6 +16,7 @@ import About from "./routes/About";
 import Ranking from "./routes/Ranking";
 import WriteBlog from "./routes/WriteBlog";
 import BlogPost from "./routes/BlogPost";
+import Loading from "./components/loading";
 
 const router = createBrowserRouter([
   {
@@ -87,7 +88,7 @@ function App() {
   }, []);
   return (
     <div className="h-[100vh] flex justify-center">
-      {isLoading ? <div>loading...</div> : <RouterProvider router={router} />}
+      {isLoading ? <Loading /> : <RouterProvider router={router} />}
     </div>
   );
 }
