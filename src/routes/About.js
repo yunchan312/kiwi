@@ -1,4 +1,5 @@
 import Logo from "../assets/kiwi.png";
+import Bird from "../assets/bird.svg";
 
 export default function About() {
   return (
@@ -28,7 +29,10 @@ export default function About() {
       <div className="flex justify-between">
         <div>
           <div className="text-2xl font-bold">Logo</div>
-          <img src={Logo} alt="logo" />
+          <div className="flex">
+            <img src={Logo} alt="logo" className="w-[100px]" />
+            <img src={Bird} alt="logo2" className="w-[130px]" />
+          </div>
         </div>
         <div className="w-[150px]">
           <div className="text-2xl font-bold">Color</div>

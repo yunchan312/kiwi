@@ -39,11 +39,13 @@ export default function MiniKiwiRank() {
     };
   }, []);
   return (
-    <div className="bg-gray-200 py-2 px-3 h-[300px] rounded-2xl">
+    <div className="bg-gray-200 py-2 px-3 h-[300px] rounded-2xl overflow-hidden">
       <div className="text-black font-bold text-xl">Kiwi Ranking</div>
-      {rank.map((k) => {
-        return <MiniRankBtn {...k} />;
-      })}
+      <div className="h-[250px] overflow-y-scroll no-scrollbar">
+        {rank.map((k) => {
+          return <MiniRankBtn {...k} />;
+        })}
+      </div>
     </div>
   );
 }

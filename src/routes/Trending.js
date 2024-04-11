@@ -55,12 +55,11 @@ export default function Trending() {
     <div className="py-10 w-[600px]">
       <div className="flex flex-col justify-center items-center">
         <img src={flameFilled} className="w-16 h-16" />
-        <div className="text-[40px]">Trending</div>
+        <div className="text-[40px]">Hot Kiwis</div>
       </div>
 
-      <div>
-        <div className="text-[30px]">Kiwi Trend</div>
-        <div>
+      <div className="py-5">
+        <div className="h-[640px] overflow-y-scroll no-scrollbar">
           {trend.length > 0 ? (
             trend.map((t) => {
               return <Kiwi key={t.id} {...t} />;

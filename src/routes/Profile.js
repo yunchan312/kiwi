@@ -71,18 +71,16 @@ export default function Profile() {
     }
   };
   const getUserInform = async () => {
-    const document = await getDocs(collection(database, "user"));
-    const result = document.docs.map((doc) => {
-      const { kiwi, blog } = doc.data();
-      return { kiwi, blog, id: doc.id };
+    const kiwiQuery = query(
+      collection(database, "blog"),
+      where("whoCreated", "==", user?.uid)
+    );
+    const snapshot = await getDocs(kiwiQuery);
+    const blogs = snapshot.docs.map((doc) => {
+      const { title } = doc.data();
+      return { title };
     });
-    result.map((d) => {
-      if (d.id === user.uid) {
-        setKiwiNum(d.kiwi.length);
-        setBlogNum(d.blog.length);
-      }
-      return null;
-    });
+    setBlogNum(blogs);
   };
   useEffect(() => {
     fetchKiwis();
@@ -123,8 +121,8 @@ export default function Profile() {
       <div>
         <div className="text-2xl">내 정보</div>
         <div className="flex justify-center items-center gap-3">
-          <WhiteBox boxTitle="내 키위" kiwis={kiwis} num={kiwiNum} />
-          <WhiteBox boxTitle="내 블로그" kiwis={kiwis} num={blogNum} />
+          <WhiteBox boxTitle="내 키위" kiwis={kiwis} num={kiwis.length} />
+          <WhiteBox boxTitle="내 블로그" kiwis={kiwis} num={blogNum.length} />
           <WhiteBox boxTitle="내 좋아요" kiwis={kiwis} />
         </div>
       </div>

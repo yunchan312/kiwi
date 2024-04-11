@@ -58,7 +58,7 @@ export default function Inquiry() {
         <img className="w-16 h-16" alt="category" src={inquiryFilled} />
         <div className="text-3xl">Inquiry</div>
       </div>
-      <div className="w-[750px] h-[400px] bg-gray-200 rounded-lg py-5 px-5">
+      <div className="w-[750px] h-[400px] py-5 px-5 flex flex-col gap-3 overflow-y-scroll no-scrollbar">
         {inquiry.length > 0 ? (
           inquiry.map((i) => {
             return <InquiryBox {...i} key={i.id} />;

@@ -49,12 +49,11 @@ export default function Ranking() {
     <div className="py-10 w-[600px]">
       <div className="flex flex-col justify-center items-center">
         <img src={rankingFilled} className="w-16 h-16" />
-        <div className="text-[40px]">Ranking</div>
+        <div className="text-[40px]">Blog Ranking</div>
       </div>
 
-      <div>
-        <div className="text-[30px]">Blog Ranking</div>
-        <div>
+      <div className="py-5">
+        <div className="flex flex-col gap-5">
           {rank.length > 0 ? (
             rank.map((t) => {
               return <PostPreview key={t.id} {...t} />;

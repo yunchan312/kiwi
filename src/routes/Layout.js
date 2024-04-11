@@ -28,8 +28,12 @@ export default function Layout() {
         <NavBtn icon={homeIcon} text={"Home"} navigate={"/"} />
         <NavBtn icon={profileIcon} text={"Profile"} navigate={"/profile"} />
         <NavBtn icon={blogIcon} text={"Blog"} navigate={"/blogmain"} />
-        <NavBtn icon={trendingIcon} text={"Trending"} navigate={"/trending"} />
-        <NavBtn icon={rankingIcon} text={"Ranking"} navigate={"/ranking"} />
+        <NavBtn icon={trendingIcon} text={"Hot Kiwis"} navigate={"/trending"} />
+        <NavBtn
+          icon={rankingIcon}
+          text={"Blog Ranking"}
+          navigate={"/ranking"}
+        />
         <NavBtn icon={inquiryIcon} text={"Inquiry"} navigate={"/inquiry"} />
         <NavBtn icon={bookmarkIcon} text={"Bookmark"} navigate={"/bookmark"} />
         <button
